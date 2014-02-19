@@ -1,0 +1,16 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy:2.2.1'
+    compile 'commons-cli:commons-cli:1.2'
+}
+
+task runScript (dependsOn: 'build', type: JavaExec) {
+    main = 'file-convert'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ['-i', 'src/test/groovy/input',  '-c', 'src/test/groovy/completed', '-g',  'build/test/generated']
+}
