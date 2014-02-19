@@ -86,7 +86,7 @@ input.eachFile() {
     }
 
     def match = (fileContent =~ /Date.*\r\n/)
-    String[] rowHeaders
+    def rowHeaders
 
     if(match.find()) {
         rowHeaders = match[0].split("\t")
@@ -96,20 +96,44 @@ input.eachFile() {
         return
     }
     
-    def output
+    String output = ""
     
     rowHeaders.each { header ->
-        output << header
+        output += header.trim() + ','
     }
     
-    output << "\n"
+    output += "\n"
     rowHeaders.each { header ->
         def headerMatcher = (header =~ /\w\w(\d{1,3})/)
         if(headerMatcher.find()) {
-            Channel requiredChannel = channelInfo[headerMatcher[0]]
+            String[] values = headerMatcher[0]
+            
+            Channel requiredChannel = channelInfo[values[1]]
             if(requiredChannel != null) {
-                
+                output += requiredChannel.units + ','
+            } else {
+                output += ','
             }
+        } else {
+            output += ','
         }
     }
+    output += "\n"
+    int headerLength = match[0].size()
+    int startDataIndex = fileContent.indexOf(match[0]) + headerLength
+    String rawData = fileContent.substring(startDataIndex)
+    
+    String[] dataRows = rawData.split("\r\n")
+    
+    dataRows.each { line ->
+        String[] values = line.split("\t")
+
+        values.each {
+            output += it + ','
+        }
+        
+        output += "\n"
+    }
+    
+    
 }
