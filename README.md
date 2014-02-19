@@ -1,4 +1,4 @@
 panda-1
 =======
 
-Script to convert txt files to a spread for cellphone mast data
+Script to convert txt files to a spreadsheet for cellphone(assuming) mast data
