@@ -5,6 +5,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 import org.apache.commons.cli.Option
+import org.apache.commons.io.FileUtils
 
 def cli = new CliBuilder(usage: "groovy file-convert.groovy --input \$dir/input --completed \$dir/completed --generated \$dir/generated")
 cli.with {
@@ -38,7 +39,13 @@ if(!generatedDir) {
 
 File input = new File(inputDir)
 File generated = new File(generatedDir)
+if(!generated.exists()) {
+    generated.mkdirs()
+}
 File completed = new File(completeDir)
+if(!completed.exists()) {
+    completed.mkdirs()
+}
 
 input.eachFile() {
     File genFile = new File(generated, it.getName())
@@ -135,5 +142,13 @@ input.eachFile() {
         output += "\n"
     }
     
-    
+    println "Writing processed contents of file: " + it.getName() + " to " + genFile.getPath()
+
+    genFile << output
+
+    File completedFile = new File(completed, it.getName())
+
+    println "Moving input file: " + it.getPath() + " to " + completedFile.getPath()
+
+    FileUtils.moveFile(it, completedFile)
 }
