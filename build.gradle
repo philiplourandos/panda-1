@@ -13,5 +13,5 @@ dependencies {
 task runScript (dependsOn: 'build', type: JavaExec) {
     main = 'file-convert'
     classpath = sourceSets.main.runtimeClasspath
-    args = ['-i', 'src/test/groovy/input',  '-c', 'src/test/groovy/completed', '-g',  'build/test/generated']
+    args = ['-i', 'src/test/groovy/input',  '-c', 'build/test/completed', '-o',  'build/test/generated/panda1.txt']
 }
