@@ -15,3 +15,22 @@ task runScript (dependsOn: 'build', type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     args = ['-i', 'src/test/groovy/input',  '-c', 'build/test/completed', '-o',  'build/test/generated/panda1.txt']
 }
+
+task distZip(type: Zip, dependsOn: ['build']) {
+    baseName = "panda1"
+    classifier = "dist"
+    
+    from('src/main/resources/bin') {
+        into('bin')
+    }
+    from('build/libs') {
+        into('lib')
+    }
+    into('lib') {
+        from configurations.runtime
+    }
+    from('src/main/groovy') {
+        include '*groovy'
+        into '.'
+    }
+}
