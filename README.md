@@ -11,5 +11,23 @@ Script to convert txt files to a spreadsheet for cellphone(assuming) mast data
 # Usage
 
 ```Shell
-    groovy file-convert -i $INPUT_DIR -g $GENERATED_DIR -c $COMPLETED_DIR
+    groovy file-convert.groovy -i $INPUT_DIR -o $OUTPUT_FILE -c $COMPLETED_DIR
+```
+
+# Distribution
+
+To generate a distribution use:
+
+```Shell
+    gradle dZ
+```
+
+There should be a zip file: *build/distributions/panda1-dist.zip*
+
+Unzip to the desired directory. From there go to the command line and navigate to the directory bin.
+
+Use:
+
+```Shell
+    convert.sh -i /opt/data/input -o /opt/data/2014-02-25.csv -g /opt/data/completed
 ```
