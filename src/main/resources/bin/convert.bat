@@ -1,0 +1,1 @@
+groovy -cp "..\lib\panda-1.jar;..\lib\commons-io-2.4.jar;..\lib\commons-cli-1.2.jar;..\lib\antlr-2.7.7.jar;..\lib\asm-4.1.jar;..\lib\asm-analysis-4.1.jar;..\lib\asm-commons-4.1.jar;..\lib\asm-tree-4.1.jar;..\lib\asm-util-4.1.jar" ..\file-convert.groovy %1 %2 %3 %4 %5 %6
