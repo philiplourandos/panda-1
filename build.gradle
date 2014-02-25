@@ -22,6 +22,7 @@ task distZip(type: Zip, dependsOn: ['build']) {
     
     from('src/main/resources/bin') {
         into('bin')
+        fileMode 555
     }
     from('build/libs') {
         into('lib')
