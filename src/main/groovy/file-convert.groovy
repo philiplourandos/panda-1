@@ -59,7 +59,10 @@ def match
 
 def sortedFiles = input.listFiles().sort() { it.name }
 sortedFiles.each {
-    println "Processing file: $input"
+    
+    def currentFileName = it.getName()
+    
+    println "Processing file: $currentFileName"
     
     String fileContent = it.text
 
