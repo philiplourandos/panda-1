@@ -54,7 +54,7 @@ if(!completed.exists()) {
 Map<String, Channel> channelInfo
 
 int headerLength = 0
-String output = ""
+def output = new StringBuilder(6000)
 def match 
 
 def sortedFiles = input.listFiles().sort() { it.name }
@@ -124,12 +124,12 @@ sortedFiles.each {
         }
     
         rowHeaders.each { header ->
-            output += header.trim() + ','
+            output << header.trim() << ','
         }
     
         println 'Start: Adding units for headers'
         
-        output += "\n"
+        output << "\n"
         rowHeaders.each { header ->
             def headerMatcher = (header =~ /\w\w(\d{1,3})/)
             if(headerMatcher.find()) {
@@ -137,15 +137,15 @@ sortedFiles.each {
             
                 Channel requiredChannel = channelInfo[values[1]]
                 if(requiredChannel != null) {
-                    output += requiredChannel.units + ','
+                    output << requiredChannel.units << ','
                 } else {
-                    output += ','
+                    output << ','
                 }
             } else {
-                output += ','
+                output << ','
             }
         }
-        output += "\n"
+        output << "\n"
         
         println 'End: Adding units for headers'
     }
@@ -159,10 +159,10 @@ sortedFiles.each {
         String[] values = line.split("\t")
 
         values.each {
-            output += it + ','
+            output << it << ','
         }
         
-        output += "\n"
+        output << "\n"
     }
     
     File completedFile = new File(completed, it.getName())
@@ -173,4 +173,4 @@ sortedFiles.each {
 }
 
 println "Writing processed data to file: $generatedOutputFile"
-generatedOutputFile << output
+generatedOutputFile << output.toString()
