@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy:2.2.1'
+    compile 'org.codehaus.groovy:groovy:2.2.2'
     compile 'commons-cli:commons-cli:1.2'
     compile 'commons-io:commons-io:2.4'
 }
@@ -22,7 +22,7 @@ task distZip(type: Zip, dependsOn: ['build']) {
     
     from('src/main/resources/bin') {
         into('bin')
-        fileMode 555
+        fileMode 0555
     }
     from('build/libs') {
         into('lib')
