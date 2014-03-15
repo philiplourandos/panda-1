@@ -29,5 +29,5 @@ Unzip to the desired directory. From there go to the command line and navigate t
 Use:
 
 ```Shell
-    convert.sh -i /opt/data/input -o /opt/data/2014-02-25.csv -g /opt/data/completed
+    convert.sh -i /opt/data/input -o /opt/data/2014-02-25.csv -c /opt/data/completed
 ```
